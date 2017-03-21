@@ -1,6 +1,10 @@
 # DrowsyDriverDetection
 Drowsy driver detection using Keras and convolution neural networks.
 
+Datasets:
+Eye dataset: http://parnec.nuaa.edu.cn/xtan/data/ClosedEyeDatabases.html
+Yawn dataset: www.eecs.uottawa.ca/~shervin/yawning
+
 Files included:
 
 EyePreprocess.py and YawnPreprocess.py : Preprocesses the data by converting the images to grayscale and dividing them into training and testing sets
