@@ -5,11 +5,9 @@ Datasets:
 
 Eye dataset: http://parnec.nuaa.edu.cn/xtan/data/datasets/dataset_B_Eye_Images.rar
 
-Eye dataset credits: http://parnec.nuaa.edu.cn/xtan/data/ClosedEyeDatabases.html
-
 Yawn dataset: http://www.discover.uottawa.ca/images/files/external/YawDD_Dataset/YawDD.rar
 
-Yawn dataset credits: www.eecs.uottawa.ca/~shervin/yawning
+[Eye dataset credits](http://parnec.nuaa.edu.cn/xtan/data/ClosedEyeDatabases.html),[Yawn dataset credits](http://www.eecs.uottawa.ca/~shervin/yawning)
 
 Files included:
 
