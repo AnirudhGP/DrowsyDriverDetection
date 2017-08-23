@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 from __future__ import print_function
 import numpy as np
+
 np.random.seed(1337)  # for reproducibility
 
 from keras.models import Sequential
@@ -9,26 +10,25 @@ from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.utils import np_utils
 from keras.optimizers import SGD, Adadelta, Adagrad
 
-
 from six.moves import cPickle as pickle
 
 pickle_files = ['open_eyes.pickle', 'closed_eyes.pickle']
 i = 0
 for pickle_file in pickle_files:
     with open(pickle_file, 'rb') as f:
-      save = pickle.load(f)
-      if i == 0:
-          train_dataset = save['train_dataset']
-          train_labels = save['train_labels']
-          test_dataset = save['test_dataset']
-          test_labels = save['test_labels']
-      else:
-          print("here")
-          train_dataset = np.concatenate((train_dataset, save['train_dataset']))
-          train_labels = np.concatenate((train_labels, save['train_labels']))
-          test_dataset = np.concatenate((test_dataset, save['test_dataset']))
-          test_labels = np.concatenate((test_labels, save['test_labels']))
-      del save  # hint to help gc free up memory
+        save = pickle.load(f)
+        if i == 0:
+            train_dataset = save['train_dataset']
+            train_labels = save['train_labels']
+            test_dataset = save['test_dataset']
+            test_labels = save['test_labels']
+        else:
+            print("here")
+            train_dataset = np.concatenate((train_dataset, save['train_dataset']))
+            train_labels = np.concatenate((train_labels, save['train_labels']))
+            test_dataset = np.concatenate((test_dataset, save['test_dataset']))
+            test_labels = np.concatenate((test_labels, save['test_labels']))
+        del save  # hint to help gc free up memory
     i += 1
 
 print('Training set', train_dataset.shape, train_labels.shape)
@@ -39,11 +39,11 @@ nb_classes = 1
 nb_epoch = 12
 
 X_train = train_dataset
-X_train= X_train.reshape((X_train.shape[0], X_train.shape[3]) + X_train.shape[1:3])
+X_train = X_train.reshape((X_train.shape[0], X_train.shape[3]) + X_train.shape[1:3])
 Y_train = train_labels
 
 X_test = test_dataset
-X_test= X_test.reshape((X_test.shape[0], X_test.shape[3]) + X_test.shape[1:3])
+X_test = X_test.reshape((X_test.shape[0], X_test.shape[3]) + X_test.shape[1:3])
 Y_test = test_labels
 
 # print shape of data while model is building
@@ -54,8 +54,8 @@ print("{1}  test samples, {4} channel{0}, {2}x{3}".format("" if X_test.shape[1] 
 _, img_channels, img_rows, img_cols = X_train.shape
 
 # convert class vectors to binary class matrices
-#Y_train = np_utils.to_categorical(y_train, nb_classes)
-#Y_test = np_utils.to_categorical(y_test, nb_classes)
+# Y_train = np_utils.to_categorical(y_train, nb_classes)
+# Y_test = np_utils.to_categorical(y_test, nb_classes)
 
 model = Sequential()
 
@@ -91,4 +91,3 @@ score = model.evaluate(X_test, Y_test, show_accuracy=True, verbose=0)
 
 print('Test score:', score[0])
 print('Test accuracy:', score[1])
-

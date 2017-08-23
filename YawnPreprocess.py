@@ -3,9 +3,11 @@ import os
 
 from six.moves import cPickle as pickle
 import cv2
+
 dirs = ['Dataset/yawnMouth', 'Dataset/normalMouth']
 countYawn = 40
 countNormal = 34
+
 
 def generate_dataset():
     '''countYawn = 0
@@ -40,8 +42,8 @@ def generate_dataset():
             if filename.endswith('.png'):
                 im = cv2.imread(dir + '/' + filename)
                 im = cv2.resize(im, (maxX, maxY))
-                im = np.dot(np.array(im, dtype='float32'), [[0.2989], [0.5870], [0.1140]])/255
-                #print(i)
+                im = np.dot(np.array(im, dtype='float32'), [[0.2989], [0.5870], [0.1140]]) / 255
+                # print(i)
                 dataset[i, :, :, :] = im[:, :, :]
                 i += 1
         if pos == 0:
@@ -49,16 +51,17 @@ def generate_dataset():
             j = i
             pos += 1
         else:
-            labels = np.concatenate((labels, np.zeros([i-j, 1], dtype=int)))
+            labels = np.concatenate((labels, np.zeros([i - j, 1], dtype=int)))
     return dataset, labels
+
 
 dataset, labels = generate_dataset()
 print("Total = ", len(dataset))
 
 totalCount = countYawn + countNormal
-split = int(countYawn*0.8)
+split = int(countYawn * 0.8)
 splitEnd = countYawn
-split2 = countYawn + int(countNormal*0.8)
+split2 = countYawn + int(countNormal * 0.8)
 
 train_dataset = dataset[:split]
 train_labels = np.ones([split, 1], dtype=int)
@@ -70,7 +73,7 @@ train_labels = np.concatenate((train_labels, np.zeros([split2 - splitEnd, 1], dt
 test_dataset = np.concatenate((test_dataset, dataset[split2:]))
 test_labels = np.concatenate((test_labels, np.zeros([totalCount - split2, 1], dtype=int)))
 
-pickle_file = 'yawnMouths.pickle'
+pickle_file = 'yawn_mouths.pickle'
 
 try:
     f = open(pickle_file, 'wb')

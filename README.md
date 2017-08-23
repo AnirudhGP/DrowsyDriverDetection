@@ -7,7 +7,9 @@ Eye dataset: http://parnec.nuaa.edu.cn/xtan/data/datasets/dataset_B_Eye_Images.r
 
 Yawn dataset: http://www.discover.uottawa.ca/images/files/external/YawDD_Dataset/YawDD.rar
 
-[Eye dataset credits](http://parnec.nuaa.edu.cn/xtan/data/ClosedEyeDatabases.html),[Yawn dataset credits](http://www.eecs.uottawa.ca/~shervin/yawning)
+Credits: [Eye dataset](http://parnec.nuaa.edu.cn/xtan/data/ClosedEyeDatabases.html),[Yawn dataset](http://www.eecs.uottawa.ca/~shervin/yawning)
+
+Note: The datasets are extracted and pickled for easier usage, the pickled files are- `clode_eyes.pickle`, `open_eyes.pickle`, `yawn_mouths.pickle`
 
 ## Files included:
 
