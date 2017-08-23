@@ -36,7 +36,7 @@ print('Test set', test_dataset.shape, test_labels.shape)
 
 batch_size = 30
 nb_classes = 1
-nb_epoch = 12
+epochs = 12
 
 X_train = train_dataset
 X_train = X_train.reshape((X_train.shape[0], X_train.shape[3]) + X_train.shape[1:3])
@@ -59,17 +59,17 @@ _, img_channels, img_rows, img_cols = X_train.shape
 
 model = Sequential()
 
-model.add(Convolution2D(32, 3, 3, border_mode='same',
+model.add(Convolution2D(32, (3, 3), padding='same',
                         input_shape=(img_channels, img_rows, img_cols)))
 model.add(Activation('relu'))
-model.add(Convolution2D(24, 3, 3))
+model.add(Convolution2D(24, (3, 3)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
 
-model.add(Convolution2D(64, 3, 3, border_mode='same'))
+model.add(Convolution2D(64, (3, 3), padding='same'))
 model.add(Activation('relu'))
-model.add(Convolution2D(64, 3, 3))
+model.add(Convolution2D(64, (3, 3)))
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
@@ -85,7 +85,7 @@ model.add(Activation('sigmoid'))
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
-model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epoch, verbose=2, validation_data=(X_test, Y_test))
+model.fit(X_train, Y_train, batch_size=batch_size, epochs=epochs, verbose=2, validation_data=(X_test, Y_test))
 
 score = model.evaluate(X_test, Y_test, show_accuracy=True, verbose=0)
 
