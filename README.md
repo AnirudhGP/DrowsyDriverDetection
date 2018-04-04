@@ -3,7 +3,7 @@ Drowsy driver detection using Keras and convolution neural networks.
 
 ## Datasets:
 
-Eye dataset: http://parnec.nuaa.edu.cn/xtan/data/datasets/dataset_B_Eye_Images.rar
+Eye dataset(Not available anymore): http://parnec.nuaa.edu.cn/xtan/data/datasets/dataset_B_Eye_Images.rar
 
 Yawn dataset: http://www.discover.uottawa.ca/images/files/external/YawDD_Dataset/YawDD.rar
 
@@ -21,7 +21,3 @@ the pickled files are- `closed_eyes.pickle`, `open_eyes.pickle`, `yawn_mouths.pi
 `eyesCNN.py` and `yawnCNN.py` : Train a CNN based on the training data.
 
 `Code_archive/eyeDetect.py` and `Code_archive/faceDetect.py` : Simple eyes and face detection code use a 16-layer cascade instead of the traditional one since the original one was not able to detect faces properly.
-
-
-
-
