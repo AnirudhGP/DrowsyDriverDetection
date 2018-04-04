@@ -1,3 +1,4 @@
+
 from __future__ import absolute_import
 from __future__ import print_function
 import numpy as np
@@ -11,6 +12,11 @@ from keras.utils import np_utils
 from keras.optimizers import SGD, Adadelta, Adagrad
 
 from six.moves import cPickle as pickle
+
+import tensorflow as tf
+sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
+
+
 
 pickle_files = ['open_eyes.pickle', 'closed_eyes.pickle']
 i = 0
@@ -60,14 +66,14 @@ _, img_channels, img_rows, img_cols = X_train.shape
 model = Sequential()
 
 model.add(Convolution2D(32, (3, 3), padding='same',
-                        input_shape=(img_channels, img_rows, img_cols)))
+                        input_shape=(img_channels, img_rows, img_cols),data_format='channels_first'))
 model.add(Activation('relu'))
-model.add(Convolution2D(24, (3, 3)))
+model.add(Convolution2D(24, (3, 3), data_format='channels_first'),)
 model.add(Activation('relu'))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Dropout(0.25))
 
-model.add(Convolution2D(64, (3, 3), padding='same'))
+model.add(Convolution2D(64, (3, 3), padding='same', data_format='channels_first'))
 model.add(Activation('relu'))
 model.add(Convolution2D(64, (3, 3)))
 model.add(Activation('relu'))
@@ -87,7 +93,7 @@ model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
 model.fit(X_train, Y_train, batch_size=batch_size, epochs=epochs, verbose=2, validation_data=(X_test, Y_test))
 
-score = model.evaluate(X_test, Y_test, show_accuracy=True, verbose=0)
+score = model.evaluate(X_test, Y_test,  verbose=0)
 
 print('Test score:', score[0])
 print('Test accuracy:', score[1])
