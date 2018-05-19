@@ -2,8 +2,13 @@
 from __future__ import absolute_import
 from __future__ import print_function
 import numpy as np
+import os
+from keras.utils import plot_model
+import cv2
 
 np.random.seed(1337)  # for reproducibility
+
+
 
 from keras.models import Sequential
 from keras.layers.core import Dense, Dropout, Activation, Flatten
@@ -16,7 +21,7 @@ from six.moves import cPickle as pickle
 import tensorflow as tf
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 
-
+os.environ["PATH"] += os.pathsep + 'C:/Program Files (x86)/Graphviz2.38/bin/'
 
 pickle_files = ['open_eyes.pickle', 'closed_eyes.pickle']
 i = 0
@@ -93,7 +98,13 @@ model.compile(loss='binary_crossentropy', optimizer=sgd, metrics=['accuracy'])
 
 model.fit(X_train, Y_train, batch_size=batch_size, epochs=epochs, verbose=2, validation_data=(X_test, Y_test))
 
-score = model.evaluate(X_test, Y_test,  verbose=0)
+score = model.evaluate(X_test, Y_test,  verbose=1)
 
 print('Test score:', score[0])
 print('Test accuracy:', score[1])
+
+#plot_model(model, to_file='model.png',show_shapes=True)
+
+#im = cv2.imread('test.jpg')
+
+#model.predict(im, batch_size=1, verbose=1, steps=None)
